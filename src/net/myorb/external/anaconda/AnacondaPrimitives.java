@@ -60,15 +60,15 @@ public class AnacondaPrimitives<T>
  * 		Polygamma function
  */
 
-		/**
-		 * implement operator - Polygamma
-		 * @param symbol the symbol associated with this object
-		 * @return operation implementation object
-		 */
-		public AbstractParameterizedFunction getPolygammaAlgorithm (String symbol)
-		{ return new MultipleVectoredMarshalingWrapper (symbol, getPolygammaImplementation ()); }
-		public CommonVectoredFunctionImplementation getPolygammaImplementation ()
-		{ return new Missing ("Polygamma"); }
+	/**
+	 * implement operator - Polygamma
+	 * @param symbol the symbol associated with this object
+	 * @return operation implementation object
+	 */
+	public AbstractParameterizedFunction getPolygammaAlgorithm (String symbol)
+	{ return new MultipleVectoredMarshalingWrapper (symbol, getPolygammaImplementation ()); }
+	public CommonVectoredFunctionImplementation getPolygammaImplementation ()
+	{ return new Missing ("Polygamma"); }
 
 /*
  * 		Polylog function
