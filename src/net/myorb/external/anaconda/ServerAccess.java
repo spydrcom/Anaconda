@@ -23,6 +23,16 @@ public class ServerAccess extends net.myorb.data.abstractions.ServerAccess
 
 
 	/**
+	 * issue STOP command to Anaconda server
+	 */
+	public static void stopServer ()
+	{
+		ServerAccess access = new ServerAccess ("LOCALHOST", 8080);
+		System.out.println (access.issueRequest ("STOP"));
+	}
+
+
+	/**
 	 * issue STOP command
 	 *  to Anaconda server
 	 * @param args not used
@@ -30,8 +40,7 @@ public class ServerAccess extends net.myorb.data.abstractions.ServerAccess
 	 */
 	public static void main (String[] args) throws Exception
 	{
-		ServerAccess access = new ServerAccess ("LOCALHOST", 8080);
-		System.out.println (access.issueRequest ("STOP"));
+		stopServer ();
 	}
 
 
