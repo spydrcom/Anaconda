@@ -372,13 +372,13 @@ public class ComplexAnacondaRPC
 
 
 /*
- * 		Zeta
+ * 		eta
  */
 
 	/* (non-Javadoc)
-	 * @see net.myorb.math.anaconda.AnacondaPrimitives#getZetaImplementation()
+	 * @see net.myorb.math.anaconda.AnacondaPrimitives#getEtaImplementation()
 	 */
-	public CommonVectoredFunctionImplementation getZetaImplementation ()
+	public CommonVectoredFunctionImplementation getEtaImplementation ()
 	{
 		return new VectorEnabledFunction ()
 		{
@@ -388,16 +388,16 @@ public class ComplexAnacondaRPC
 				ComplexMarker value;
 				int n = using.size ();
 				profile.parameterCheck (n);
-				value = n==1? zeta (using.get (0)) : zeta (using.get (0), using.get (1));
+				value = n==1? eta (using.get (0)) : eta (using.get (0), using.get (1));
 				return (ComplexValue<Double>) value;
 			}
-			FunctionProfile profile = new FunctionProfile ("Zeta", 1, 2);
+			FunctionProfile profile = new FunctionProfile ("eta", 1, 2);
 
 			/* (non-Javadoc)
 			 * @see net.myorb.math.expressions.algorithms.CommonOperatorLibrary.CommonFunctionImplementation#markupForDisplay(java.lang.String, java.lang.String, net.myorb.math.expressions.gui.rendering.NodeFormatting)
 			 */
 			public String markupForDisplay (String operator, String operand, NodeFormatting using)
-			{ return zetaRender (using) + using.formatParenthetical (operand); }
+			{ return etaRender (using) + using.formatParenthetical (operand); }
 
 			/* (non-Javadoc)
 			 * @see net.myorb.math.expressions.algorithms.CommonOperatorLibrary.CommonFunctionImplementation#configure(java.lang.String)
@@ -411,7 +411,7 @@ public class ComplexAnacondaRPC
 			/* (non-Javadoc)
 			 * @see net.myorb.math.anaconda.ComplexAnacondaRPC.VectorEnabledFunction#functionRpcText()
 			 */
-			String functionRpcText () { return zetaText (configuration); }
+			String functionRpcText () { return etaText (configuration); }
 		};
 	}
 	
@@ -420,11 +420,11 @@ public class ComplexAnacondaRPC
 	 * @param a function denominator value
 	 * @return computed value
 	 */
-	ComplexMarker zeta (ComplexValue<Double> s, ComplexValue<Double> a)
+	ComplexMarker eta (ComplexValue<Double> s, ComplexValue<Double> a)
 	{
 		return PythonComplexFunctionRPC.requestEvalFor
 		(
-			getAnacondaAccess (), zetaText (a.Re ().toString ()), s
+			getAnacondaAccess (), etaText (a.Re ().toString ()), s
 		);
 	}
 	
@@ -432,32 +432,121 @@ public class ComplexAnacondaRPC
 	 * @param s function parameter
 	 * @return computed value
 	 */
-	ComplexMarker zeta (ComplexValue<Double> s)
+	ComplexMarker eta (ComplexValue<Double> s)
 	{
 		return PythonComplexFunctionRPC.requestEvalFor
 		(
-			getAnacondaAccess (), "mpmath.zeta", s
+			getAnacondaAccess (), "mpmath.eta", s
 		);
 	}
 
 	/**
 	 * @param a function denominator value
-	 * @return text of the zeta function reference
+	 * @return text of the eta function reference
 	 */
-	String zetaText (String a)
+	String etaText (String a)
 	{
-		return a == null ? "mpmath.zeta" :
-		"lambda x: mpmath.zeta ( x, " + a + " )";
+		return a == null ? "mpmath.eta" :
+		"lambda x: mpmath.eta ( x, " + a + " )";
 	}
 
 	/**
 	 * @param using the node formatting object used by the render agent
 	 * @return formatted reference
 	 */
-	String zetaRender (NodeFormatting using)
+	String etaRender (NodeFormatting using)
 	{
-		return formatIdentifierFor ("zeta", using);
+		return formatIdentifierFor ("eta", using);
 	}
+
+
+	/*
+	 * 		Zeta
+	 */
+
+		/* (non-Javadoc)
+		 * @see net.myorb.math.anaconda.AnacondaPrimitives#getZetaImplementation()
+		 */
+		public CommonVectoredFunctionImplementation getZetaImplementation ()
+		{
+			return new VectorEnabledFunction ()
+			{
+				@SuppressWarnings("unchecked")
+				public ComplexValue<Double> evaluate (List<ComplexValue<Double>> using)
+				{
+					ComplexMarker value;
+					int n = using.size ();
+					profile.parameterCheck (n);
+					value = n==1? zeta (using.get (0)) : zeta (using.get (0), using.get (1));
+					return (ComplexValue<Double>) value;
+				}
+				FunctionProfile profile = new FunctionProfile ("Zeta", 1, 2);
+
+				/* (non-Javadoc)
+				 * @see net.myorb.math.expressions.algorithms.CommonOperatorLibrary.CommonFunctionImplementation#markupForDisplay(java.lang.String, java.lang.String, net.myorb.math.expressions.gui.rendering.NodeFormatting)
+				 */
+				public String markupForDisplay (String operator, String operand, NodeFormatting using)
+				{ return zetaRender (using) + using.formatParenthetical (operand); }
+
+				/* (non-Javadoc)
+				 * @see net.myorb.math.expressions.algorithms.CommonOperatorLibrary.CommonFunctionImplementation#configure(java.lang.String)
+				 */
+				public void configure (String parameters)
+				{
+					this.configuration = parameters;
+				}
+				String configuration = null;
+				
+				/* (non-Javadoc)
+				 * @see net.myorb.math.anaconda.ComplexAnacondaRPC.VectorEnabledFunction#functionRpcText()
+				 */
+				String functionRpcText () { return zetaText (configuration); }
+			};
+		}
+		
+		/**
+		 * @param s function parameter
+		 * @param a function denominator value
+		 * @return computed value
+		 */
+		ComplexMarker zeta (ComplexValue<Double> s, ComplexValue<Double> a)
+		{
+			return PythonComplexFunctionRPC.requestEvalFor
+			(
+				getAnacondaAccess (), zetaText (a.Re ().toString ()), s
+			);
+		}
+		
+		/**
+		 * @param s function parameter
+		 * @return computed value
+		 */
+		ComplexMarker zeta (ComplexValue<Double> s)
+		{
+			return PythonComplexFunctionRPC.requestEvalFor
+			(
+				getAnacondaAccess (), "mpmath.zeta", s
+			);
+		}
+
+		/**
+		 * @param a function denominator value
+		 * @return text of the zeta function reference
+		 */
+		String zetaText (String a)
+		{
+			return a == null ? "mpmath.zeta" :
+			"lambda x: mpmath.zeta ( x, " + a + " )";
+		}
+
+		/**
+		 * @param using the node formatting object used by the render agent
+		 * @return formatted reference
+		 */
+		String zetaRender (NodeFormatting using)
+		{
+			return formatIdentifierFor ("zeta", using);
+		}
 
 
 }

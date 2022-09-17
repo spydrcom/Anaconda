@@ -28,6 +28,20 @@ public class AnacondaPrimitives<T>
 	public CommonVectoredFunctionImplementation getZetaImplementation ()
 	{ return new Missing ("Zeta"); }
 
+	/*
+	 * 		eta function
+	 */
+
+		/**
+		 * implement operator - eta
+		 * @param symbol the symbol associated with this object
+		 * @return operation implementation object
+		 */
+		public AbstractParameterizedFunction getEtaAlgorithm (String symbol)
+		{ return new MultipleVectoredMarshalingWrapper (symbol, getEtaImplementation ()); }
+		public CommonVectoredFunctionImplementation getEtaImplementation ()
+		{ return new Missing ("eta"); }
+
 /*
  * 		Gamma function
  */
